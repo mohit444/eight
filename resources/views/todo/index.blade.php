@@ -13,7 +13,9 @@
                    <x-alert/>
                    <ul>
                        @foreach ($todos as $todo)
-                           <li>{{$todo->title}}</li>
+                           <li>{{$todo->title}} 
+                                <a href="{{'/todo/'.$todo->id.'/edit'}}" style="float:right;">Edit</a>
+                            </li>
                        @endforeach
                    </ul>
                 </div>

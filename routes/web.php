@@ -13,9 +13,11 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/todo', [App\Http\Controllers\TodoController::class, 'index']);
+Route::get('/todo', [App\Http\Controllers\TodoController::class, 'index'])->name('todo.index');
 Route::get('/todo/create', [App\Http\Controllers\TodoController::class, 'create']);
 Route::post('/todo/create', [App\Http\Controllers\TodoController::class, 'store']);
+Route::get('/todo/{todo}/edit',[App\Http\Controllers\TodoController::class, 'edit']);
+Route::patch('/todo/{todo}/update',[App\Http\Controllers\TodoController::class, 'update'])->name('todo.update');
 
 
 Route::get('/', function () {

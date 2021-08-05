@@ -24,4 +24,15 @@ class TodoController extends Controller
         Todo::create($request->all());
         return redirect('/todo')->with('success', 'Todo created.');
     }
+
+    public function edit(Todo $todo)
+    {
+        return view('todo.edit',compact('todo'));
+    }
+
+    public function update(Request $request, Todo $todo)
+    {
+        $todo->update(['title' => $request->title]);
+        return redirect(route('todo.index'))->with('success','todo updated');
+    }
 }
