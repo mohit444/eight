@@ -14,15 +14,17 @@ use App\Http\Controllers\HomeController;
 |
 */
 Route::get('/todo', [App\Http\Controllers\TodoController::class, 'index'])->name('todo.index');
+Route::get('/', [App\Http\Controllers\TodoController::class, 'index'])->name('todo.index');
 Route::get('/todo/create', [App\Http\Controllers\TodoController::class, 'create']);
 Route::post('/todo/create', [App\Http\Controllers\TodoController::class, 'store']);
 Route::get('/todo/{todo}/edit',[App\Http\Controllers\TodoController::class, 'edit']);
 Route::patch('/todo/{todo}/update',[App\Http\Controllers\TodoController::class, 'update'])->name('todo.update');
+Route::put('/todo/{todo}/completed',[App\Http\Controllers\TodoController::class, 'completed'])->name('todo.completed');
 
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Route::get('/user',[App\Http\Controllers\UserController::class, 'index']);
 

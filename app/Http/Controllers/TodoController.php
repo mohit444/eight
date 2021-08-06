@@ -10,7 +10,7 @@ class TodoController extends Controller
 {
     public function index()
     {
-        $todos = Todo::all();
+        $todos = Todo::orderby('completed')->get();
         return view('todo/index')->with('todos', $todos);
     }
 
@@ -30,9 +30,15 @@ class TodoController extends Controller
         return view('todo.edit',compact('todo'));
     }
 
-    public function update(Request $request, Todo $todo)
+    public function update(TodoCreateRequest $request, Todo $todo)
     {
         $todo->update(['title' => $request->title]);
         return redirect(route('todo.index'))->with('success','todo updated');
+    }
+
+    public function completed(Todo $todo)
+    {
+        $todo->update(['completed' => true]);
+        return redirect()->back();
     }
 }

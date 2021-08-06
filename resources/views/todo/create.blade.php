@@ -6,7 +6,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">{{ __('TODO create') }} 
-                    <a href="/todo" style="float:right;">Show Todos</a>
+                    <a href="/todo" style="float:right;"><i class="fas fa-eye"></i></a>
                 </div>
 
                 
