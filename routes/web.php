@@ -13,22 +13,28 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/todo', [App\Http\Controllers\TodoController::class, 'index'])->name('todo.index');
-Route::get('/', [App\Http\Controllers\TodoController::class, 'index'])->name('todo.index');
+/*Route::get('/todo', [App\Http\Controllers\TodoController::class, 'index'])->name('todo.index');
 Route::get('/todo/create', [App\Http\Controllers\TodoController::class, 'create']);
 Route::post('/todo/create', [App\Http\Controllers\TodoController::class, 'store']);
 Route::get('/todo/{todo}/edit',[App\Http\Controllers\TodoController::class, 'edit']);
 Route::patch('/todo/{todo}/update',[App\Http\Controllers\TodoController::class, 'update'])->name('todo.update');
-Route::put('/todo/{todo}/completed',[App\Http\Controllers\TodoController::class, 'completed'])->name('todo.completed');
+Route::delete('/todo/{todo}/delete',[App\Http\Controllers\TodoController::class, 'delete'])->name('todo.delete');
+*/
+
+Route::middleware('auth')->group(function(){
+    Route::resource('todo',App\Http\Controllers\TodoController::class);
+    Route::put('/todo/{todo}/completed',[App\Http\Controllers\TodoController::class, 'completed'])->name('todo.completed');
+    Route::put('/todo/{todo}/incompleted',[App\Http\Controllers\TodoController::class, 'incompleted'])->name('todo.incompleted');
+    Route::get('/user',[App\Http\Controllers\UserController::class, 'index']);
+    Route::post('/upload',[App\Http\Controllers\UserController::class, 'uploadAvatar']);
+});
 
 
-/*Route::get('/', function () {
+
+
+Route::get('/', function () {
     return view('welcome');
-});*/
-
-Route::get('/user',[App\Http\Controllers\UserController::class, 'index']);
-
-Route::post('/upload',[App\Http\Controllers\UserController::class, 'uploadAvatar']);
+});
 
 Auth::routes();
 

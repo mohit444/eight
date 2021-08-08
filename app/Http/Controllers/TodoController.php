@@ -10,7 +10,7 @@ class TodoController extends Controller
 {
     public function index()
     {
-        $todos = Todo::orderby('completed')->get();
+        $todos = auth()->user()->todo->sortBy('completed');
         return view('todo/index')->with('todos', $todos);
     }
 
@@ -21,7 +21,7 @@ class TodoController extends Controller
 
     public function store(TodoCreateRequest $request)
     {
-        Todo::create($request->all());
+        auth()->user()->todo()->create($request->all());
         return redirect('/todo')->with('success', 'Todo created.');
     }
 
@@ -36,9 +36,26 @@ class TodoController extends Controller
         return redirect(route('todo.index'))->with('success','todo updated');
     }
 
+    public function show(Todo $todo)
+    {
+        return view('todo.show', compact('todo'));
+    }
+
     public function completed(Todo $todo)
     {
         $todo->update(['completed' => true]);
+        return redirect()->back();
+    }
+
+    public function incompleted(Todo $todo)
+    {
+        $todo->update(['completed' => false]);
+        return redirect()->back();
+    }
+
+    public function destroy(Todo $todo)
+    {
+        $todo->delete();
         return redirect()->back();
     }
 }

@@ -16,7 +16,9 @@
                    <form action="{{route('todo.update',$todo->id)}}" method="post">
                        @csrf
                        @method('patch')
-                       <input type="text" name="title" value="{{ $todo->title }}" >
+                       
+                       <div style="padding:5px;"> <input type="text" name="title" value="{{ $todo->title }}" /></div>
+                       <div style="padding:5px;"><textarea name="description" placeholder="Description">{{$todo->description}}</textarea></div>
                        <input type="submit" value="Update" >
                     </form>
                 </div>
